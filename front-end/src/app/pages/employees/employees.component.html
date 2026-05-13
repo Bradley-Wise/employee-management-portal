@@ -1,0 +1,57 @@
+<h2>Employees</h2>
+
+<table border="1" cellpadding="5">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of employees">
+      <td>{{ e.id }}</td>
+      <td>{{ e.firstName }} {{ e.lastName }}</td>
+      <td>{{ e.email }}</td>
+      <td>{{ departmentMap[e.departmentId] || "Unknown" }}</td>
+      <td>
+        <button (click)="startEdit(e)">Edit</button>
+        <button (click)="deleteEmployee(e.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>{{ isEditing ? "Edit Employee" : "Add New Employee" }}</h3>
+<form (ngSubmit)="saveEmployee()">
+  <input
+    type="text"
+    [(ngModel)]="editingEmployee.firstName"
+    name="firstName"
+    placeholder="First Name"
+    required
+  />
+  <input
+    type="text"
+    [(ngModel)]="editingEmployee.lastName"
+    name="lastName"
+    placeholder="Last Name"
+    required
+  />
+  <input
+    type="email"
+    [(ngModel)]="editingEmployee.email"
+    name="email"
+    placeholder="Email"
+    required
+  />
+  <select [(ngModel)]="editingEmployee.departmentId" name="departmentId">
+    <option *ngFor="let deptId of departmentIds" [value]="deptId">
+      {{ departmentMap[deptId] }}
+    </option>
+  </select>
+  <button type="submit">{{ isEditing ? "Update" : "Add" }}</button>
+  <button type="button" (click)="cancelEdit()">Cancel</button>
+</form>
