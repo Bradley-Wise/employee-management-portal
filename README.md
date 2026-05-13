@@ -137,7 +137,7 @@ Full-stack project demonstrating authentication, CRUD operations, and API integr
 
 ### Login Page
 
-![Login Page](ScreenShots/login.png)
+![Login Page](ScreenShots/Login.png)
 
 ### Backend Login (Swagger Auth)
 
